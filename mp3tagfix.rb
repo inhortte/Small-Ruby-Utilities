@@ -28,5 +28,6 @@ files.each { |f|
   mp3.tag.title = title
   mp3.tag.artist = artist
   mp3.tag.album = album
+  mp3.tag.genre = 12 # right now, just let the genre be 'other'.
   mp3.close
 }
