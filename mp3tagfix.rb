@@ -18,7 +18,7 @@ files = Dir.entries(dir).select { |f|
 files.each { |f|
   m = /^(\d+)[- _]+(.+)\.mp3$/.match(f)
   track_number = m[1].to_i
-  title = m[2].split.map { |s| s.capitalize }.join(" ")
+  title = m[2].split(/[\s_]/).map { |s| s.capitalize }.join(" ")
   puts "Tagging: #{f}"
   mp3 = Mp3Info.new(f)
   mp3.removetag1
