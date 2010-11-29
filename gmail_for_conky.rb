@@ -13,11 +13,16 @@ if ARGV.length == 0
   exit
 end
 
-mail.each do |m|
-  puts ''
-  puts Time.parse(m[:sent]).localtime.strftime("%d %b %Y %H.%M")
-  puts "From: #{m[:from_name]}"
-  puts "Email: #{m[:from_email]}"
-  puts "Subject: #{m[:subject]}"
+if mail.size == 0
+  puts "Nothing, you leper!"
+else
+  mail.each do |m|
+    puts ''
+    puts Time.parse(m[:sent]).localtime.strftime("%d %b %Y %H.%M")
+    puts "From: #{m[:from_name]}"
+    puts "Email: #{m[:from_email]}"
+    puts "Subject: #{m[:subject]}"
+  end
 end
+
 

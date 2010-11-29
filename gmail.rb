@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+#! /usr/local/bin/ruby
 
 require 'rexml/document'
 require 'yaml'
@@ -31,9 +31,9 @@ def passwd(pass)
 end
 
 arg = ARGV[0]
-login = '-------'
-password = passwd('-------')
-temp_file = '/tmp/gmail.html'
+login = '-----'
+password = passwd('-----')
+temp_file = '/tmp/gmail.xml'
 out_file = '/home/polaris/.new_mail.yml'
 quote = '"'
 email_limit = 4
@@ -45,7 +45,9 @@ entries = doc.elements.to_a("feed/entry")
 number_of_new_emails = entries.size
 entries.map! do |e|
   author = e.get_elements("author")[0]
-  { :subject => e.get_elements("title")[0].get_text.value,
+  title = e.get_elements("title")[0].get_text
+  title = title.nil? ? '-none-' : title.value
+  { :subject => title,
     :from_name => author.get_elements("name")[0].get_text.value,
     :from_email => author.get_elements("email")[0].get_text.value,
     :sent => e.get_elements("issued")[0].get_text.value }
