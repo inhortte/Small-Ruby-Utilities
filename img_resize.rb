@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 
 # Resize a whole directory of images to a particular width, scaling the height.
 
@@ -10,7 +10,7 @@ width = ARGV[0]
 dir = ARGV[1]
 
 Dir.entries(dir).each { |f|
-  m = /^(.+)\.(gif|png|jpg|jpeg)/.match(f)
+  m = /^(.+)\.(gif|png|jpg|jpeg)/i.match(f)
   if m
     file = File.join(dir, f)
     tmp_file = File.join(dir, ".tmp_img.#{m[2]}")

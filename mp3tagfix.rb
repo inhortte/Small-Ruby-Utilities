@@ -1,4 +1,4 @@
-#! /usr/local/bin/ruby
+#! /usr/bin/env ruby
 
 require 'rubygems'
 require 'mp3info'
@@ -16,7 +16,7 @@ files = Dir.entries(dir).select { |f|
 }
 
 files.each { |f|
-  m = /^(\d+)[- _]+(.+)\.mp3$/.match(f)
+  m = /^(\d+)\.?[- _]+(.+)\.mp3$/.match(f)
   track_number = m[1].to_i
   title = m[2].split(/[\s_]/).map { |s| s.capitalize }.join(" ")
   puts "Tagging: #{f}"
