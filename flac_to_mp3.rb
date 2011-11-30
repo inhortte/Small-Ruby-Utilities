@@ -26,6 +26,14 @@ Dir.entries('.').select { |f| f =~ %r{\.flac$} }.each do |file|
   tag_map.keys.each do |flac_tag|
     cmd = "metaflac --show-tag=#{flac_tag} \"#{file}\""
     tag = `#{cmd}`.strip
+    if tag.nil? || tag.empty?
+      cmd = "metaflac --show-tag=#{flac_tag.downcase} \"#{file}\""
+      tag = `#{cmd}`.strip
+      if tag.nil? || tag.empty?
+        cmd = "metaflac --show-tag=#{flac_tag.downcase.capitalize} \"#{file}\""
+        tag = `#{cmd}`.strip
+      end
+    end
     unless tag.nil? || tag.empty?
       tags.merge!(flac_tag => tag.split(/=/).last)
     end
